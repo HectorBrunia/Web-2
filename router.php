@@ -15,7 +15,6 @@ $phoneController = new PhoneController();
 
 switch ($params[0]) {
     case 'log':
-        $authController = new AuthController();
         $authController->showFormLogin();
         break;
     case 'validate':
