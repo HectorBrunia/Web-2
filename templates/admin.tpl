@@ -51,7 +51,7 @@
                     <td>{$phone->model}</td>
                     <td>{$phone->brand}</td>
                     <td><a href='delete/{$phone->id}' type='button' class='btn btn-danger'>Borrar</a></td>
-                    <td><a href='formedit/{$phone->id}' type='button' class='btn btn-danger'>editar</a></td>
+                    <td><a href='formedit/{$phone->id}' type='button' class='btn btn-warning'>editar</a></td>
                 </tr>
             {/foreach}
             </tbody>
@@ -66,7 +66,7 @@
                 <button type="submit" class="btn btn-primary mt-2">Guardar</button>
             </div>
         </form>
-        <table class='table table-bordered'>
+        <table class='table table-bordered text-center '>
             <thead class='thead-dark'>
                 <tr>
                     <th scope='col'>id</th>
@@ -78,8 +78,13 @@
                     <tr>
                         <td>{$brand->id_brand}</td>
                         <td>{$brand->brand_name}</td>
-                        <td><a href='delete/{$phone->id}' type='button' class='btn btn-danger'>Borrar</a></td>
-                        <td><a href='formedit/{$phone->id}' type='button' class='btn btn-danger'>editar</a></td>
+                        <td><a href='delete_brand/{$brand->id_brand}' type='button' class='btn btn-danger'>Borrar</a></td>
+                        <td>
+                            <form action="edit_brand/{$brand->id_brand}" method="POST" class="my-4">
+                                <input name="brand_name" type="text" class="form-control">
+                                <button type="submit" class="btn btn-warning mt-2">editar</button>
+                            </form>
+                        </td>
                     </tr>
                 {/foreach}
             </tbody>

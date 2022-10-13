@@ -6,6 +6,7 @@
             Marcas
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="home">Todas</a></li>
                 {foreach from=$brands item=$brand} 
                     <li><a class="dropdown-item" href="listar/{$brand->id_brand}">{$brand->brand_name}</a></li>
                 {/foreach}
@@ -25,6 +26,7 @@
             </thead>
             <tbody>
             {foreach from=$phones item=$phone} 
+                {if $phone->id_brand == $id}
                 <tr>
                     <td> 
                     {if isset($phone->img)}
@@ -37,6 +39,7 @@
                     <td>{$phone->camera}</td>
                     <td>{$phone->brand}</td>
                 </tr>
+                {/if}
             {/foreach}
             </tbody> 
         </table>

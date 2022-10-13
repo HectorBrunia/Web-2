@@ -1,6 +1,9 @@
 <?php
-require_once '.\app\controllers\phoen.controller.php';
+require_once '.\app\controllers\phone.controller.php';
 require_once '.\app\controllers\login.controller.php';
+require_once '.\app\controllers\brand.controller.php';
+require_once '.\app\controllers\public.controller.php';
+require_once '.\app\helpers\auth.helper.php';
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
@@ -10,51 +13,70 @@ if (!empty($_GET['action'])) {
 }
 
 $params = explode('/', $action);
-
+session_start();
 $phoneController = new PhoneController();
+$PublicController = new PublicController();
+$BrandController = new BrandController();
+$authController = new AuthController();
+$authHelper = new AuthHelper();
 
 switch ($params[0]) {
     case 'log':
         $authController->showFormLogin();
         break;
     case 'validate':
-        $authController = new AuthController();
         $authController->validateUser();
         break;
-
     case 'logout':
-        $authController = new AuthController();
         $authController->logout();
         break;
     case 'home':
-        $phoneController->showHome();
+        $PublicController->showHome();
+        break;
+    case 'listar':
+        $id = $params[1];
+        $PublicController->showListaByGenre($id);
         break;
     case 'admin':
-        $authController = new AuthHelper();
-        $authController->checkLoggedIn();
-        $phoneController->showAdmin();
-        break;
-    case 'add':
-        $phoneController->addPhone();
+        $authHelper->checkLoggedIn();
+        $PublicController->showAdmin();
         break;
     case 'add_brand':
-        $phoneController->addBrand();
+        $authHelper->checkLoggedIn();
+        $BrandController->add();
+        break;
+    case 'delete_brand':
+        $id = $params[1];
+        $authHelper->checkLoggedIn();
+        $BrandController->delete($id);
+        break;
+    case 'edit_brand':
+        $id = $params[1];
+        $authHelper->checkLoggedIn();
+        $BrandController->edit($id);
+        break;
+    case 'add':
+        $authHelper->checkLoggedIn();
+        $phoneController->add();
         break;
     case 'delete':
+        $authHelper->checkLoggedIn();
         $id = $params[1];
-        $phoneController->deletePhone($id);
+        $phoneController->delete($id);
         break;
     case 'formedit':
+        $authHelper->checkLoggedIn();
         $id = $params[1];
         $phoneController->showFormEdit($id);
         break;
-    case 'editphone':
+    case 'edit':
+        $authHelper->checkLoggedIn();
         $id = $params[1];
-        $phoneController->editPhone($id);
+        $phoneController->edit($id);
         break;
     case 'viewphone':
         $id = $params[1];
-        $phoneController->showPhone($id);
+        $PublicController->showPhone($id);
         break;
     default:
         echo('404 Page not found');

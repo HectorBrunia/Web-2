@@ -20,9 +20,12 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="home">Home</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="admin">Administrar</a>
+                    </li>
                         {if !isset($smarty.session.USER_ID)}
                             <li class="nav-item">
-                                <a class="nav-link" href="log">Administrar</a>
+                                <a class="nav-link" href="log">login</a>
                             </li>
                         {else} 
                             <li class="nav-item ml-auto">
