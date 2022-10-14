@@ -37,10 +37,6 @@ switch ($params[0]) {
         $id = $params[1];
         $PublicController->showListaByGenre($id);
         break;
-    case 'admin':
-        $authHelper->checkLoggedIn();
-        $PublicController->showAdmin();
-        break;
     case 'add_brand':
         $authHelper->checkLoggedIn();
         $BrandController->add();

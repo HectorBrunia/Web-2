@@ -1,4 +1,3 @@
-{include file="header.tpl"}
 <div class=" row justify-content-center ">
     <div class="col-5 justify-content-center">
         <form action="add" method="POST" enctype="multipart/form-data" class="my-4">
@@ -12,19 +11,15 @@
                         <input name="memory" type="text" class="form-control">
                         <label>Display</label>
                         <input name="display" type="text" class="form-control">
-                    </div>
-                </div>
-                <div class="col-auto justify-content-center">
-                    <div class="form-group text-center">
                         <label>GPU/CPU</label>
                         <input name="cpugpu" type="text" class="form-control">
                         <label>Camara</label>
                         <input name="camera" type="text" class="form-control">
                         <label>Marca</label>
-                        <select name="id_brand" class="form-select" aria-label="Default select example">
-                        <option selected>Selecionar Marca</option>
+                        <select  name="id_brand" required>
+                        <option  value=" ">Selecionar Marca</option>
                         {foreach from=$brands item=$brand} 
-                            <option value="{$brand->id_brand}">{$brand->brand_name}</option>
+                            <option  value="{$brand->id_brand}">{$brand->brand_name}</option>
                         {/foreach}
                         </select>
                     </div>
@@ -34,28 +29,6 @@
                 <button type="submit" class="btn btn-primary mt-2">Guardar</button>
             </div>
         </form>
-        <table class='table table-bordered text-center'>
-            <thead class='thead-dark'>
-                <tr>
-                    <th scope='col'>id</th>
-                    <th scope='col'>Modelo</th>
-                    <th scope='col'>Marca</th>
-                    <th scope='col'></th>
-                    <th scope='col'></th>
-                </tr>
-            </thead>
-            <tbody>
-            {foreach from=$phones item=$phone} 
-                <tr>
-                    <td>{$phone->id}</td>
-                    <td>{$phone->model}</td>
-                    <td>{$phone->brand}</td>
-                    <td><a href='delete/{$phone->id}' type='button' class='btn btn-danger'>Borrar</a></td>
-                    <td><a href='formedit/{$phone->id}' type='button' class='btn btn-warning'>editar</a></td>
-                </tr>
-            {/foreach}
-            </tbody>
-        </table>
     </div>
     <div class="col-5 justify-content-center">
         <form action="add_brand" method="POST" class="my-4">
@@ -91,4 +64,3 @@
         </table>
     </div>
 </div>
-{include file="footer.tpl"}

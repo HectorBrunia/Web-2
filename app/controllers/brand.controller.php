@@ -13,22 +13,17 @@ class BrandController {
     public function add(){
         $brand = $_POST['brand'];
         $this->brand_model->insertBrand($brand);
-        header("Location: " . BASE_URL."/admin "); 
+        header("Location: " . BASE_URL); 
     }
 
     public function delete($id){
         $this->brand_model->delete($id);
-        header("Location: " . BASE_URL."/admin "); 
+        header("Location: " . BASE_URL); 
     }
 
     public function edit($id){
         $brand_name = $_POST['brand_name'];
         $this->brand_model->update($brand_name,$id);
-        header("Location: " . BASE_URL ."admin"); 
-    }
-
-    public function showFormEdit($id) {
-        $phone = $this->brand_model->getbrandById($id);
-        $this->view->showFormEdit($phone);
+        header("Location: " . BASE_URL); 
     }
 }

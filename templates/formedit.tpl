@@ -12,25 +12,25 @@
                 <div class="col-auto justify-content-center">
                     <div class="form-group text-center ">
                         <label>Modelo</label>
-                        <input name="model" type="text" required class="form-control" placeholder="{$phone->model}">
+                        <input name="model" type="text" class="form-control" placeholder="{$phone->model}">
                         <label>Memory</label>
-                        <input name="memory" type="text" required class="form-control" placeholder="{$phone->memory}">
+                        <input name="memory" type="text" class="form-control" placeholder="{$phone->memory}">
                         <label>Display</label>
-                        <input name="display" type="text" required class="form-control" placeholder="{$phone->display}">
+                        <input name="display" type="text" class="form-control" placeholder="{$phone->display}">
                         <label>GPU/CPU</label>
                         <input name="cpugpu" type="text" required class="form-control" placeholder="{$phone->cpugpu}">
                         <label>Camara</label>
-                        <input name="camera" type="text" required class="form-control" placeholder="{$phone->camera}">
+                        <input name="camera" type="text" class="form-control" placeholder="{$phone->camera}">
                         <select name="id_brand" class="form-select" aria-label="Default select example">
                         <option selected>Selecionar Marca</option>
                         {foreach from=$brands item=$brand} 
-                            <option value="{$brand->id_brand}">{$brand->brand_name}</option>
+                            <option required value="{$brand->id_brand}">{$brand->brand_name}</option>
                         {/foreach}
                         </select>
                     </div>
                 </div>
                 <label>Imagen</label>
-                <input type="File" required class="form-control" name="imagen">
+                <input type="File" class="form-control" name="imagen">
                 <button type="submit" class="btn btn-primary mt-2">Guardar</button>
             </div>
         </form>

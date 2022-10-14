@@ -20,13 +20,14 @@ class PhoneModel {
         $phone = $query->fetch(PDO::FETCH_OBJ);
         return $phone;
     }
-    
-
-    public function insertPhone($model, $memory, $display,$cpugpu,$camera,$id_brand, $img = null) {
+    public function insertPhone($model, $memory, $display,$cpugpu,$camera,$id_brand) {
+        $query = $this->db->prepare("INSERT INTO phones (model, memory, display, cpugpu, camera, id_brand) VALUES (?, ?, ?, ?,?,?)");
+        $query->execute([$model, $memory, $display, $cpugpu, $camera, $id_brand]);
+    }
+    public function insertPhoneWhitImage($model, $memory, $display,$cpugpu,$camera,$id_brand, $img = null) {
         $pathImg = null;
         if ($img)
             $pathImg = $this->uploadImage($img);
-
         $query = $this->db->prepare("INSERT INTO phones (img, model, memory, display, cpugpu, camera, id_brand) VALUES (?, ?, ?, ?, ?,?,?)");
         $query->execute([$pathImg, $model, $memory, $display, $cpugpu, $camera, $id_brand]);
     }
@@ -36,24 +37,21 @@ class PhoneModel {
         move_uploaded_file($img, $target);
         return $target;
     }
-
-    public function deleteImage($phone){
-        unlink($phone->img);
+    public function updatePhone($id, $model, $memory, $display, $cpugpu, $camera, $id_brand) {
+        $query = $this->db->prepare("UPDATE phones  SET model=?, memory=?, display=?, cpugpu=?, camera=?, id_brand=?  WHERE id = ?");
+        $query->execute([$model, $memory, $display, $cpugpu, $camera, $id_brand,$id]);
     }
-
-    public function updatePhone($id, $model, $memory, $display, $cpugpu, $camera, $id_brand, $img=null) {
+    public function updatePhoneWhitImage($id, $model, $memory, $display, $cpugpu, $camera, $id_brand, $img=null) {
         $pathImg = null;
         if ($img)
             $pathImg = $this->uploadImage($img);
-
         $query = $this->db->prepare("UPDATE phones  SET img=?, model=?, memory=?, display=?, cpugpu=?, camera=?, id_brand=?  WHERE id = ?");
         $query->execute([$pathImg, $model, $memory, $display, $cpugpu, $camera, $id_brand,$id]);
     }
 
-
-    function deletePhone($id) {
+    function deletePhone($phone) {
         $query = $this->db->prepare('DELETE FROM phones WHERE phones . id = ?');
-        $query->execute([$id]);
+        $query->execute([$phone->id]);
     }
 
 }

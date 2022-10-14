@@ -11,4 +11,13 @@ class AuthHelper {
             die();
         }
     }
+
+    public function IsLoggedIn(){
+        if (!isset($_SESSION['IS_LOGGED'])) {
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
 }

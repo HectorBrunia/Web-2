@@ -2,7 +2,7 @@
 <div class="m-5 row justify-content-center bg-dark text-white">
     <div class="m-2 col-4 justify-content-center">
     {if isset($phone->img)}
-        <img class="icon img-thumbnail" src="{$phone->img}"/>
+        <img width="500" class="icon img-thumbnail" src="{$phone->img}"/>
     {/if}
     </div>
     <div class="m-2 col-4 justify-content-center ">

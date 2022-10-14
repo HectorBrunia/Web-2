@@ -22,17 +22,19 @@ class  PhoneController  {
         $id_brand = $_POST['id_brand'];
         if($_FILES['imagen']['type'] == "image/jpg" || $_FILES['imagen']['type'] == "image/jpeg" 
         || $_FILES['imagen']['type'] == "image/png" ){
-            $this->phone_model->insertPhone($model, $memory, $display,$cpugpu,$camera,$id_brand, $img);
+            $this->phone_model->insertPhoneWhitImage($model, $memory, $display,$cpugpu,$camera,$id_brand, $img);
         }
         else{
             $this->phone_model->insertPhone($model, $memory, $display,$cpugpu,$camera,$id_brand);
         }
-        header("Location: " . BASE_URL ."admin"); 
+        header("Location: " . BASE_URL); 
     }
 
     public function delete($id){
-        $this->phone_model->deletePhone($id);
-        header("Location: " . BASE_URL."/admin "); 
+        $phone = $this->phone_model->getPhoneById($id);
+        $this->phone_model->deleteImage($phone);
+        $this->phone_model->deletePhone($phone);
+        header("Location: " . BASE_URL); 
     }
 
     public function showFormEdit($id) {
@@ -42,8 +44,6 @@ class  PhoneController  {
     }
 
     public function edit($id){
-        $phone = $this->phone_model->getPhoneById($id);
-        $this->phone_model->deleteImage($phone);
         $img = $_FILES['imagen']['tmp_name'];
         $model = $_POST['model'];
         $memory = $_POST['memory'];
@@ -53,11 +53,12 @@ class  PhoneController  {
         $id_brand = $_POST['id_brand'];
         if($_FILES['imagen']['type'] == "image/jpg" || $_FILES['imagen']['type'] == "image/jpeg" 
         || $_FILES['imagen']['type'] == "image/png" ){
+            unlink($phone->img);
             $this->phone_model->updatePhone($id, $model, $memory, $display,$cpugpu,$camera,$id_brand, $img);
         }
         else{
             $this->phone_model->updatePhone($id, $model, $memory, $display,$cpugpu,$camera,$id_brand);
         }
-        header("Location: " . BASE_URL ."admin"); 
+        header("Location: " . BASE_URL); 
     }
 }
