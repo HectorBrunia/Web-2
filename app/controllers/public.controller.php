@@ -25,14 +25,16 @@ class PublicController {
     }
 
     public function showPhone($id) {
+        $loggedin = $this->helper_model->IsLoggedIn();
         $phone = $this->phone_model->getPhoneById($id);
-        $this->view->showPhone($phone);
+        $this->view->showPhone($phone,$loggedin);
     }
 
     public function showLog() {
         $this->view->showLog();
     }
-    public function showListaByGenre($id){
+
+    public function showPhoneByGenre($id){
         $loggedin = $this->helper_model->IsLoggedIn();
         $phones = $this->phone_model->getAllPhones();
         $brands = $this->brand_model->getAllBrand();

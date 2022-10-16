@@ -13,13 +13,13 @@ class PhoneModel {
         $phones = $query->fetchAll(PDO::FETCH_OBJ);
         return $phones;
     }
-
     public function getPhoneById($id) {
         $query = $this->db->prepare("SELECT phones.*, brands.brand_name as brand FROM phones JOIN brands ON phones.id_brand = brands.id_brand WHERE id = $id");
         $query->execute();
         $phone = $query->fetch(PDO::FETCH_OBJ);
         return $phone;
     }
+
     public function insertPhone($model, $memory, $display,$cpugpu,$camera,$id_brand) {
         $query = $this->db->prepare("INSERT INTO phones (model, memory, display, cpugpu, camera, id_brand) VALUES (?, ?, ?, ?,?,?)");
         $query->execute([$model, $memory, $display, $cpugpu, $camera, $id_brand]);
@@ -37,11 +37,14 @@ class PhoneModel {
         move_uploaded_file($img, $target);
         return $target;
     }
+
     public function updatePhone($id, $model, $memory, $display, $cpugpu, $camera, $id_brand) {
         $query = $this->db->prepare("UPDATE phones  SET model=?, memory=?, display=?, cpugpu=?, camera=?, id_brand=?  WHERE id = ?");
         $query->execute([$model, $memory, $display, $cpugpu, $camera, $id_brand,$id]);
     }
     public function updatePhoneWhitImage($id, $model, $memory, $display, $cpugpu, $camera, $id_brand, $img=null) {
+        $phone = $this->getPhoneById($id);
+        unlink($phone->img);
         $pathImg = null;
         if ($img)
             $pathImg = $this->uploadImage($img);

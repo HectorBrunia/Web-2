@@ -12,17 +12,22 @@ class PhoneView {
         $this->smarty->assign('brands', $brands);
         $this->smarty->assign('id', $id);
         $this->smarty->assign('loggedin', $loggedin);
+        $this->smarty->display('header.tpl');
         $this->smarty->display('phoneList.tpl');
     }
 
-    function showPhone($phone) {
+    function showPhone($phone,$loggedin) {
         $this->smarty->assign('phone', $phone);
+        $this->smarty->assign('loggedin', $loggedin);
+        $this->smarty->display('header.tpl');
         $this->smarty->display('phone.tpl');
     }
 
-    function showFormEdit($phone,$brands) {
+    function showFormEdit($phone,$brands,$loggedin) {
         $this->smarty->assign('phone', $phone);
         $this->smarty->assign('brands', $brands);
+        $this->smarty->assign('loggedin', $loggedin);
+        $this->smarty->display('header.tpl');
         $this->smarty->display('formedit.tpl');
     }
 }

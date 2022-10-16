@@ -1,4 +1,3 @@
-{include file="header.tpl"}
 <div class="m-5 row justify-content-center bg-dark text-white">
     <div class="m-2 col-4 justify-content-center">
     {if isset($phone->img)}

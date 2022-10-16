@@ -10,6 +10,8 @@ class LoginView {
 
     function showFormLogin($error = null) {
         $this->smarty->assign("error", $error);
+        $this->smarty->assign('loggedin', false);
+        $this->smarty->display('header.tpl');
         $this->smarty->display('log.tpl');
     }
 }
