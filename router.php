@@ -12,12 +12,12 @@ if (!empty($_GET['action'])) {
 }
 
 $params = explode('/', $action);
+
 session_start();
 $phoneController = new PhoneController();
 $PublicController = new PublicController();
 $BrandController = new BrandController();
 $authController = new AuthController();
-
 switch ($params[0]) {
     case 'log':
         $authController->showFormLogin();

@@ -6,6 +6,7 @@ class AuthHelper {
      * lo redirige al login.
      */
     public function checkLoggedIn() {
+        session_start();
         if (!isset($_SESSION['IS_LOGGED'])) {
             header("Location: " . BASE_URL . 'log');
             die();
