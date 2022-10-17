@@ -12,7 +12,6 @@ if (!empty($_GET['action'])) {
 }
 
 $params = explode('/', $action);
-
 session_start();
 $phoneController = new PhoneController();
 $PublicController = new PublicController();

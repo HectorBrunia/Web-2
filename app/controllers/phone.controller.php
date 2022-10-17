@@ -25,20 +25,20 @@ class  PhoneController  {
         $camera = $_POST['camera'];
         $id_brand = $_POST['id_brand'];
         if($_FILES['imagen']['type'] == "image/jpg" || $_FILES['imagen']['type'] == "image/jpeg" 
-        || $_FILES['imagen']['type'] == "image/png" ){
-            $this->phone_model->insertPhoneWhitImage($model, $memory, $display,$cpugpu,$camera,$id_brand, $img);
+        || $_FILES['imagen']['type'] == "image/png" ) {
+
+            $this->phone_model->insertPhone($model, $memory, $display,$cpugpu,$camera,$id_brand, $img);
         }
-        else{
-            $this->phone_model->insertPhone($model, $memory, $display,$cpugpu,$camera,$id_brand);
-        }
+        else
+            {
+            $id = $this->phone_model->insertPhone($model, $memory, $display,$cpugpu,$camera,$id_brand);
+            }
         header("Location: " . BASE_URL); 
     }
 
     public function delete($id){
         $this->authHelper->checkLoggedIn();
-        $phone = $this->phone_model->getPhoneById($id);
-        unlink($phone->img);
-        $this->phone_model->deletePhone($phone);
+        $this->phone_model->deletePhone($id);
         header("Location: " . BASE_URL); 
     }
 
@@ -61,7 +61,7 @@ class  PhoneController  {
         $id_brand = $_POST['id_brand'];
         if($_FILES['imagen']['type'] == "image/jpg" || $_FILES['imagen']['type'] == "image/jpeg" 
         || $_FILES['imagen']['type'] == "image/png" ){
-            $this->phone_model->updatePhoneWhitImage($id, $model, $memory, $display,$cpugpu,$camera,$id_brand, $img);
+            $this->phone_model->updatePhone($id, $model, $memory, $display,$cpugpu,$camera,$id_brand, $img);
         }
         else{
             $this->phone_model->updatePhone($id, $model, $memory, $display,$cpugpu,$camera,$id_brand);

@@ -19,7 +19,6 @@
                 <label>Camara</label>
                 <textarea name="camera" type="text" class="form-control" placeholder="{$phone->camera}" rows="3"></textarea>
                 <select name="id_brand" class="form-select" aria-label="Default select example" required>
-                <option value=" ">Selecionar Marca</option>
                 {foreach from=$brands item=$brand} 
                     <option value="{$brand->id_brand}">{$brand->brand_name}</option>
                 {/foreach}
